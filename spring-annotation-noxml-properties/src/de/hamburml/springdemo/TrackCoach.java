@@ -1,16 +1,20 @@
 package de.hamburml.springdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Scope("prototype") // default is singleton
+//@Scope("prototype")
 public class TrackCoach implements Coach {
 
 	@Autowired
 	private FortuneService fortuneService;
 
+	@Value("${foo.email}")
+	private String email;
+	
 	private int numberOfWorkouts = 0;
 
 	@Override
@@ -27,10 +31,12 @@ public class TrackCoach implements Coach {
 	@Bean(initMethod = "initTrackCoach")
 	public void initTrackCoach() {
 		System.out.println("trackcoach will be initialized");
+		System.out.println("My mail is: " + this.email);
+		
 	}
 
-	@Bean(destroyMethod = "close")
-	public void close() {
+	@Bean(destroyMethod = "closeTrackCoach")
+	public void closeTrackCoach() {
 		System.out.println("trackcoach will be destroyed");
 	}
 

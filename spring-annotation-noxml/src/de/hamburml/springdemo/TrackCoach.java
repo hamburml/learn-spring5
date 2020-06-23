@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Scope("prototype") // default is singleton
+//@Scope("prototype")
 public class TrackCoach implements Coach {
 
 	@Autowired
@@ -29,8 +29,8 @@ public class TrackCoach implements Coach {
 		System.out.println("trackcoach will be initialized");
 	}
 
-	@Bean(destroyMethod = "close")
-	public void close() {
+	@Bean(destroyMethod = "closeTrackCoach")
+	public void closeTrackCoach() {
 		System.out.println("trackcoach will be destroyed");
 	}
 
